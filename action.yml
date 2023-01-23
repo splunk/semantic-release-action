@@ -2,10 +2,13 @@
 name: "Semantic release"
 description: 'This tool performs semantic release or returns value of next release version'
 inputs:
-  dry-run:  # if only version should be returned
+  dry_run:  # if only version should be returned without releasing new version
     description: 'dry run'
     default: false
     required: false
+  semantic_version:
+    description: 'version of semantic-release to be used'
+    required: true
 outputs:
   new_release_version:
     description: 'Version of the new release'
@@ -17,5 +20,5 @@ runs:
   using: 'composite'
   steps:
     - id: semantic
-      run: npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec;if [[ ${{ inputs.dry-run }} == true ]]; then npx semantic-release --dry-run; else npx semantic-release;fi
+      run: npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec;if [[ ${{ inputs.dry_run }} == true ]]; then npx semantic-release@${{ inputs.semantic_version }} --dry-run; else semantic-release@${{ inputs.semantic_version }};fi
       shell: bash
