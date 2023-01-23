@@ -20,5 +20,5 @@ runs:
   using: 'composite'
   steps:
     - id: semantic
-      run: npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec;if [[ ${{ inputs.dry_run }} == true ]]; then npx semantic-release@${{ inputs.semantic_version }} --dry-run; else semantic-release@${{ inputs.semantic_version }};fi
+      run: npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec;if [[ ${{ inputs.dry_run }} == true ]]; then npx semantic-release@${{ inputs.semantic_version }} --dry-run; else npx semantic-release@${{ inputs.semantic_version }};fi
       shell: bash
