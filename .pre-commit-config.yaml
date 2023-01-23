@@ -1,0 +1,14 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+    -   id: check-merge-conflict
+-   repo: local
+    hooks:
+      - id: actionlint
+        name: actionlint
+        entry: actionlint
+        args: [-ignore, 'property ".+" is not defined in object type', -ignore, 'receiver of object dereference "version" must be type of object but got "string"']
+        language: script
+        types: ["yaml"]
+        files: ^.github/workflows/

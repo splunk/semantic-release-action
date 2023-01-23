@@ -5,7 +5,19 @@ on:
       - main
 
 jobs:
-   new-release:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.7"
+      - name: Install actionlint
+        run: |
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/v1.6.8/scripts/download-actionlint.bash)
+      - uses: pre-commit/action@v3.0.0
+  new-release:
+    name: Release new version of action
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,10 +28,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Semantic Release
+      - name: Semantic release
         id: semantic
-        run: |
-          npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
-          npx semantic-release@20
+        uses: splunk/semantic-release-action@v1.1.1
+        with:
+          semantic_version: 20
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  update-semver:
+    name: Move Respository semver tags
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: new-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: haya14busa/action-update-semver@v1
