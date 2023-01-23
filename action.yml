@@ -1,0 +1,21 @@
+# action.yml
+name: "Semantic release"
+description: 'This tool performs semantic release or returns value of next release version'
+inputs:
+  dry-run:  # if only version should be returned
+    description: 'dry run'
+    default: false
+    required: false
+outputs:
+  new_release_version:
+    description: 'Version of the new release'
+    value: ${{ steps.semantic.outputs.version }}
+  new_release_published:
+    description: 'Whether a new release was published.'
+    value: ${{ steps.semantic.outputs.new_release_published }}
+runs:
+  using: 'composite'
+  steps:
+    - id: semantic
+      run: npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec;if [[ ${{ inputs.dry-run }} == true ]]; then npx semantic-release --dry-run; else npx semantic-release;fi
+      shell: bash
