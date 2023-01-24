@@ -21,6 +21,7 @@ jobs:
         run: |
           bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/v1.6.23/scripts/download-actionlint.bash)
       - uses: pre-commit/action@v3.0.0
+
   new-release:
     name: Release new version of action
     runs-on: ubuntu-latest
@@ -30,18 +31,16 @@ jobs:
         with:
           submodules: false
           persist-credentials: false
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@v1.1.1
+        uses: splunk/semantic-release-action@v1.1
         with:
           semantic_version: 20
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
   update-semver:
-    name: Move Respository semver tags
+    name: Move Repository semver tags
     if: startsWith(github.ref, 'refs/tags/v')
     needs: new-release
     runs-on: ubuntu-latest
