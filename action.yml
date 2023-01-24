@@ -6,9 +6,6 @@ inputs:
     description: "dry run - if only version should be returned without releasing new version"
     default: false
     required: false
-  semantic_version:
-    description: "version of semantic-release to be used"
-    required: true
 
 outputs:
   new_release_version:
@@ -29,8 +26,8 @@ runs:
       run: |
         npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
         if [[ ${{ inputs.dry_run }} == true ]]; 
-          then npx semantic-release@${{ inputs.semantic_version }} --dry-run
+          then npx semantic-release@20 --dry-run
         else 
-          npx semantic-release@${{ inputs.semantic_version }}
+          npx semantic-release@20
         fi
       shell: bash
