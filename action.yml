@@ -1,30 +1,30 @@
 name: "Semantic release"
-description: 'This tool performs semantic release or returns value of next release version'
+description: "This tool performs semantic release or returns value of next release version"
 
 inputs:
   dry_run:
-    description: 'dry run - if only version should be returned without releasing new version'
+    description: "dry run - if only version should be returned without releasing new version"
     default: false
     required: false
   semantic_version:
-    description: 'version of semantic-release to be used'
+    description: "version of semantic-release to be used"
     required: true
 
 outputs:
   new_release_version:
-    description: 'Version of the new release'
+    description: "Version of the new release"
     value: ${{ steps.semantic.outputs.version }}
   new_release_published:
-    description: 'Whether a new release was published.'
+    description: "Whether a new release was published"
     value: ${{ steps.semantic.outputs.new_release_published }}
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: "18"
     - id: semantic
       run: |
         npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
