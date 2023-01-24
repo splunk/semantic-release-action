@@ -21,7 +21,7 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - id: Setup Node.js
+    - id: Setup Node
       uses: actions/setup-node@v3
       with:
         node-version: '18'
