@@ -31,6 +31,10 @@ jobs:
         with:
           submodules: false
           persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@v1.2
