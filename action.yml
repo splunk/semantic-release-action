@@ -30,7 +30,7 @@ runs:
         do
            echo "test: $line"
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
-        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec ${{ inputs.extra_plugins }}
+        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git ${{ inputs.extra_plugins }}
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
