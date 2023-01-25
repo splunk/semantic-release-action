@@ -31,7 +31,7 @@ runs:
         do
            extra_plugins="$extra_plugins $line"
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
-        extra_plugins=$(echo -e "$extra_plugins" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+        extra_plugins="$(echo -e "$extra_plugins" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git "$extra_plugins"
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
