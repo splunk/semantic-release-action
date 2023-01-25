@@ -26,6 +26,7 @@ runs:
       run: |
         cd ${{github.action_path}}
         npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
+      shell: bash
     - id: semantic
       run: |
         if [[ ${{ inputs.dry_run }} == true ]]; 
