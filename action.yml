@@ -6,6 +6,8 @@ inputs:
     description: "dry run - if only version should be returned without releasing new version"
     default: false
     required: false
+  extra_plugins:
+    description: "extra plugins - if plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
 
 outputs:
   new_release_version:
@@ -24,6 +26,7 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
+      echo ${{ inputs.extra_plugins }}
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
