@@ -28,7 +28,7 @@ runs:
       run: |
         while read line
         do
-        echo $line
+        echo "test: $line"
         done < ${{ inputs.extra_plugins }}
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git
         if [[ ${{ inputs.dry_run }} == true ]]; 
