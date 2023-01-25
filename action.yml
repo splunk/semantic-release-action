@@ -22,12 +22,9 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
-    - name: install npm packages
-      run: |
-        npm --prefix ${{github.action_path}} install ${{github.action_path}}
-      shell: bash
     - id: semantic
       run: |
+        npm --prefix ${{github.action_path}} install ${{github.action_path}}
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
