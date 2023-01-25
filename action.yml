@@ -26,11 +26,12 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
+        extra_plugins = ""
         while IFS= read -r line
         do
-           echo "test: $line"
+           extra_plugins="$extra_plugins $line"
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
-        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git ${{ inputs.extra_plugins }}
+        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git $extra_plugins
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
