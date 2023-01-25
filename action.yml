@@ -26,7 +26,7 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
-        extra_plugins = ""
+        extra_plugins=""
         while IFS= read -r line
         do
            extra_plugins="$extra_plugins $line"
