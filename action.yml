@@ -22,11 +22,12 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
+    - name: install npm packages
+      run: |
+        cd ${{github.action_path}}
+        npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
     - id: semantic
       run: |
-        npm config set save false
-        npm install -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
-        npm config set save true
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
