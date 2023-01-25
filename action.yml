@@ -24,7 +24,7 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
-        npm -g --prefix ${{github.action_path}} install ${{github.action_path}}
+        npm install -g -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
