@@ -26,7 +26,10 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
-        echo "${{ inputs.extra_plugins }}"
+        while IFS= read -r line
+        do
+           echo "test: $line"
+        done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
