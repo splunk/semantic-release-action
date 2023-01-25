@@ -24,7 +24,7 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
-        pm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
+        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
