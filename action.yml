@@ -38,8 +38,7 @@ runs:
     - id: semantic
       run: |      
         if [[ ${{ inputs.dry_run }} == true ]]; 
-          echo "Running dry-run Semantic Release"
-          then npx semantic-release@20 --dry-run
+          then echo "Running dry-run Semantic Release"; npx semantic-release@20 --dry-run
         else 
           echo "Running Semantic Release"
           npx semantic-release@20
