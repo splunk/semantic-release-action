@@ -30,6 +30,7 @@ runs:
         while read line
         do
           if [ ! -z "$line" ];then
+            echo "npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')""
             npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
           fi
         done < ${{ inputs.extra_plugins }}
