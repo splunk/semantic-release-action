@@ -29,7 +29,8 @@ runs:
         extra_plugins=""
         while IFS= read -r line
         do
-           npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+           echo "npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')""
+           #npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git
         if [[ ${{ inputs.dry_run }} == true ]]; 
