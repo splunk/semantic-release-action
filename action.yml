@@ -35,7 +35,7 @@ runs:
         done <<< "${{ inputs.extra_plugins }}"
         $install_command
       shell: bash
-    - name: Semantic Release
+    - id: semantic
       run: |      
         if [[ ${{ inputs.dry_run }} == true ]]; 
           echo "Running dry-run Semantic Release"
