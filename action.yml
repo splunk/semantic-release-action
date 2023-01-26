@@ -26,15 +26,15 @@ runs:
         node-version: "18"
     - id: semantic
       run: |
-        extra_plugins=""
+        command="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git"
         while read line
         do
           if [ ! -z "$line" ];then
             echo "npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')""
-            npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+            command="$command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
           fi
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
-        npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git
+        $command
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
         else 
