@@ -27,7 +27,7 @@ runs:
     - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
-        if [[ ! -z ${{ inputs.extra_plugins }} ]]
+        if [[ ! -z "${{ inputs.extra_plugins }}" ]]
         then
           while IFS= read -r line
           do
