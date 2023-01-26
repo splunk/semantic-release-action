@@ -27,11 +27,12 @@ runs:
     - id: semantic
       run: |
         extra_plugins=""
-        while IFS= read -r line
+        while read line
         do
-           echo "npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')""
-           #npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-        done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
+          if [ ! -z "$line" ];then
+            npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+          fi
+        done < ${{ inputs.extra_plugins }}
         npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
