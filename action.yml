@@ -30,10 +30,11 @@ runs:
         while read line
         do
           if [ ! -z "$line" ];then
-            echo "npm install --no-package-lock --save false -D "$(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')""
+            echo "$command"
             command="$command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
           fi
         done < <(printf '%s\n' "${{ inputs.extra_plugins }}")
+        echo "command to be execute: $command"
         $command
         if [[ ${{ inputs.dry_run }} == true ]]; 
           then npx semantic-release@20 --dry-run
