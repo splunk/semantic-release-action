@@ -24,7 +24,7 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
-    - id: semantic
+    - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git"
         while IFS= read -r line
@@ -33,11 +33,14 @@ runs:
             install_command="$install_command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
           fi
         done <<< "${{ inputs.extra_plugins }}"
-        echo "command to be executed: $install_command"
         $install_command
+    - name: Semantic Release
+      run: |      
         if [[ ${{ inputs.dry_run }} == true ]]; 
+          echo "Running dry-run Semantic Release"
           then npx semantic-release@20 --dry-run
         else 
+          echo "Running Semantic Release"
           npx semantic-release@20
         fi
       shell: bash
