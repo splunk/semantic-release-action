@@ -27,12 +27,12 @@ runs:
     - id: semantic
       run: |
         base_install="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git"
-        while read line
+        while IFS= read -r line
         do
           if [ ! -z "$line" ];then
             command="$command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
           fi
-        done <"${{ inputs.extra_plugins }}"
+        done <<< "${{ inputs.extra_plugins }}"
         echo "command to be execute: $command"
         $command
         if [[ ${{ inputs.dry_run }} == true ]]; 
