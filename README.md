@@ -5,6 +5,7 @@ Repository for providing basic semantic-release library functionalities as a Git
 | Input Parameter  | Required | Description                                                                |
 |:----------------:|:--------:|----------------------------------------------------------------------------|
 |     dry_run      |  false   | dry run - if only version should be returned without releasing new version |
+|   extra_plugins  |  false   | extra plugins - if additional plugins are to be installed                  |
 
 ## Outputs
 |       Input Parameter       | Description                                                    |
@@ -29,4 +30,7 @@ jobs:
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@v1
+        with:
+          extra_plugins: |
+            @google/semantic-release-replace-plugin
 ```
