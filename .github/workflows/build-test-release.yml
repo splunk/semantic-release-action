@@ -69,7 +69,7 @@ jobs:
         name: Docker meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/splunk/splunk-release-test/splunk-release-test
+          images: ghcr.io/splunk/semantic-release-action/semantic-release-action
           tags: |
             type=semver,pattern=v{{major}}.{{minor}}
             type=semver,pattern=v{{major}}
