@@ -64,7 +64,7 @@ jobs:
         with:
           registry: ghcr.io
           username: splunk
-          password: ${{ secrets.GH_TOKEN_ADMIN }}
+          password: ${{ secrets.GH_TOKEN }}
       - name: test rep owner
         run: echo ${{ github.repository_owner }}
       - 
