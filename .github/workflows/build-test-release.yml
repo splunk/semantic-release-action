@@ -67,6 +67,7 @@ jobs:
           password: ${{ secrets.GH_TOKEN_ADMIN }}
       - 
         name: Docker meta
+        id: docker_action_meta
         uses: docker/metadata-action@v4
         with:
           images: ghcr.io/splunk/semantic-release-action/semantic-release-action
