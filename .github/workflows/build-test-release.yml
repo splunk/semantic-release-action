@@ -65,6 +65,8 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.GH_TOKEN_ADMIN }}
+      - name: test rep owner
+        run: echo ${{ github.repository_owner }}
       - 
         name: Docker meta
         id: docker_action_meta
