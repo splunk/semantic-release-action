@@ -1,5 +1,5 @@
 # semantic-release-action
-Repository for providing basic semantic-release library functionalities as a GitHub action
+Repository for providing basic semantic-release library functionalities as a GitHub action.
 
 ## Inputs
 | Input Parameter  | Required | Description                                                                |
