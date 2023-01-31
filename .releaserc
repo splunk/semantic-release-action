@@ -33,5 +33,6 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/git",
       "@semantic-release/github",
+      "@google/semantic-release-replace-plugin"
     ],
 }
