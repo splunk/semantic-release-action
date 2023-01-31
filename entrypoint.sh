@@ -20,8 +20,6 @@ extra_plugins=$2
 
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
-echo "ls"
-ls -la
 
 install_command="npm install --legacy-peer-deps -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
 if [[ ! -z "$extra_plugins" ]]
@@ -43,5 +41,3 @@ else
     echo "Running Semantic Release"
     npx semantic-release@20
 fi
-
-cat $GITHUB_OUTPUT
