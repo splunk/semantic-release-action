@@ -35,6 +35,9 @@ jobs:
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@v1.2
+        with: 
+          extra_plugins: |
+            @google/semantic-release-replace-plugin 
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
 
