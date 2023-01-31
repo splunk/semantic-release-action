@@ -1,3 +1,19 @@
+#   ########################################################################
+#   Copyright 2021 Splunk Inc.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#   ########################################################################
+
 name: "Semantic release"
 description: "This tool performs semantic release or returns value of next release version"
 
@@ -12,40 +28,13 @@ inputs:
 outputs:
   new_release_version:
     description: "Version of the new release"
-    value: ${{ steps.semantic.outputs.version }}
   new_release_published:
     description: "Whether a new release was published"
-    value: ${{ steps.semantic.outputs.new_release_published }}
 
 runs:
-  using: "composite"
-  steps:
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: "18"
-    - name: Prepare Semantic Release
-      run: |
-        install_command="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
-        if [[ ! -z "${{ inputs.extra_plugins }}" ]]
-        then
-          while IFS= read -r line
-          do
-            if [ ! -z "$line" ];then
-              install_command="$install_command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-            fi
-          done <<< "${{ inputs.extra_plugins }}"
-        fi
-        $install_command
-      shell: bash
-    - id: semantic
-      run: |      
-        if [[ ${{ inputs.dry_run }} == true ]]
-        then
-          echo "Running dry-run Semantic Release"
-          npx semantic-release@20 --dry-run
-        else 
-          echo "Running Semantic Release"
-          npx semantic-release@20
-        fi
-      shell: bash
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.dry_run }}
+    - ${{ inputs.extra_plugins }}
+    
