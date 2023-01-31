@@ -1,5 +1,5 @@
 # semantic-release-action
-Repository for providing basic semantic-release library functionalities as a GitHub action
+Repository for providing basic semantic-release library functionalities as a GitHub action.
 
 ## Inputs
 | Input Parameter  | Required | Description                                                                |
@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@v1
+        uses: splunk/semantic-release-action@v1.2
         with:
           extra_plugins: |
             @google/semantic-release-replace-plugin
