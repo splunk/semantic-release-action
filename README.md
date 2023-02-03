@@ -11,7 +11,7 @@ Repository for providing basic semantic-release library functionalities as a Git
 |       Input Parameter       | Description                                                    |
 |:---------------------------:|:---------------------------------------------------------------|
 |     new_release_version     | Version of the new release                                     |
-|    new_release_published    | Whether a new release was published                            |                                                                       
+|    new_release_published    | Whether a new release was published                            |                                                                      
 
 ## Example usage:
 
