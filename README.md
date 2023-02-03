@@ -16,7 +16,7 @@ Repository for providing basic semantic-release library functionalities as a Git
 ## Example usage:
 
 ```yaml
-# jobs section in GH actions  workflow file
+# jobs section in GH actions  workflow file 
 jobs:
  release:
     name: Release new version
