@@ -30,7 +30,7 @@ outputs:
     description: "Whether a new release was published"
 runs:
   using: "docker"
-  image: "docker://ghcr.io/splunk/semantic-release-action/semantic-release-action:v1.2.9"
+  image: "Dockerfile"
   args:
     - ${{ inputs.dry_run }}
     - ${{ inputs.extra_plugins }}
