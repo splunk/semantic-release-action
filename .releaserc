@@ -32,7 +32,10 @@
         }
       ],
       "@semantic-release/release-notes-generator",
-      "@semantic-release/git",
+      ["@semantic-release/git", {
+            "assets": ["action.yml"],
+            "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+        }],
       "@semantic-release/github",
     ],
 }
