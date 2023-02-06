@@ -16,7 +16,6 @@
 
 name: "Semantic release"
 description: "This tool performs semantic release or returns value of next release version"
-
 inputs:
   dry_run:
     description: "dry run - if only version should be returned without releasing new version"
@@ -24,16 +23,14 @@ inputs:
     required: false
   extra_plugins:
     description: "plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
-
 outputs:
   new_release_version:
     description: "Version of the new release"
   new_release_published:
     description: "Whether a new release was published"
-
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "docker://ghcr.io/splunk/semantic-release-action/semantic-release-action:v1.2.9"
   args:
     - ${{ inputs.dry_run }}
     - ${{ inputs.extra_plugins }}
