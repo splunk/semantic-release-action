@@ -84,7 +84,7 @@ jobs:
           cache-to: type=inline
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@v1.2
+        uses: splunk/semantic-release-action@ci/update-workflow
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
 
