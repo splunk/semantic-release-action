@@ -18,6 +18,9 @@
 dry_run=$1
 extra_plugins=$2
 
+echo "**** ls -la ****"
+ls -la
+
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
 
