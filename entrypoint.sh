@@ -21,6 +21,9 @@ extra_plugins=$2
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
 
+echo "**** adding trusted dir ****"
+git config --global --add safe.directory /github/workspace
+
 echo "**** ls -la ****"
 ls -la
 
