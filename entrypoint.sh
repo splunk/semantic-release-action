@@ -21,14 +21,8 @@ extra_plugins=$2
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
 
-echo "**** adding trusted dir ****"
+# adding trusted dir: https://github.com/actions/runner-images/issues/6775
 git config --global --add safe.directory /github/workspace
-
-echo "**** ls -la ****"
-ls -la
-
-echo "**** git status ****"
-git status
 
 install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
 if [[ ! -z "$extra_plugins" ]]
