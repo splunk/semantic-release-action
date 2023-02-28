@@ -34,3 +34,6 @@ runs:
   args:
     - ${{ inputs.dry_run }}
     - ${{ inputs.extra_plugins }}
+    - ${{ inputs.gpg_private_key }}
+    - ${{ inputs.passphrase }}
+    
