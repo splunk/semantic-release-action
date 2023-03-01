@@ -86,10 +86,13 @@ jobs:
           cache-to: type=inline
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@test/debug
+        uses: splunk/semantic-release-action@fix/signed-commits
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
-
+        with:
+          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
+        
   update-semver:
     name: Move Repository semver tags
     if: startsWith(github.ref, 'refs/tags/v')

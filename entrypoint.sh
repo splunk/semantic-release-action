@@ -14,12 +14,27 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 #   ######################################################################## 
-
 dry_run=$1
 extra_plugins=$2
-
+gpg_private_key=$3
+passphrase=$4
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
+
+export GIT_AUTHOR_NAME="srv-rr-github-token"
+export GIT_AUTHOR_EMAIL="srv-rr-github-token@splunk.com"
+export GIT_COMMITTER_NAME="srv-rr-github-token"
+export GIT_COMMITTER_EMAIL="srv-rr-github-token@splunk.com"
+
+echo $gpg_private_key | gpg --batch --yes --import 
+echo '/usr/bin/gpg2 --passphrase "$passphrase" --batch --no-tty "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
+git config gpg.program "/tmp/gpg-with-passphrase"
+gpg --list-secret-keys
+
+git config --global user.signingkey "srv-rr-github-token"
+git config --global commit.gpgsign true
+git config --global user.email srv-rr-github-token@splunk.com
+git config --global user.name srv-rr-github-token
 
 # adding trusted dir: https://github.com/actions/runner-images/issues/6775
 git config --global --add safe.directory /github/workspace
