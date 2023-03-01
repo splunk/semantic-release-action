@@ -25,7 +25,8 @@ export GIT_AUTHOR_NAME="srv-rr-github-token"
 export GIT_AUTHOR_EMAIL="srv-rr-github-token@splunk.com"
 export GIT_COMMITTER_NAME="srv-rr-github-token"
 export GIT_COMMITTER_EMAIL="srv-rr-github-token@splunk.com"
-
+echo $gpg_private_key
+echo $passphrase
 echo $gpg_private_key | gpg --batch --yes --import 
 echo '/usr/bin/gpg2 --passphrase "$passphrase" --batch --no-tty "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
 git config gpg.program "/tmp/gpg-with-passphrase"
