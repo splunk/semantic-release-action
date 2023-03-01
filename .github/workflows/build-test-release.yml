@@ -71,19 +71,6 @@ jobs:
           tags: ${{ steps.docker_action_meta.outputs.tags }}
           labels: ${{ steps.docker_action_meta.outputs.labels }}
           cache-to: type=inline
-      - name: test commit
-        run: |
-          export GPG_TTY=`tty`
-          echo $GPG_TTY
-          export GIT_TRACE=1
-          gpg --version
-          which gpg
-          gpg --list-secret-keys
-          git config -l | grep gpg
-          git config --get user.signingkey
-          echo "test" > test.txt
-          git add test.txt
-          git commit -m "test"
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@develop
