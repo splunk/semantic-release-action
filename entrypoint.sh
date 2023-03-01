@@ -21,41 +21,41 @@ passphrase=$4
 echo "dry_run: $dry_run"
 echo "extra_plugins: $extra_plugins"
 
-export GPG_TTY=`tty`
-echo $GPG_TTY
-export GIT_AUTHOR_NAME="srv-rr-github-token"
-export GIT_AUTHOR_EMAIL="4607705+srv-rr-github-token@users.noreply.github.com"
-export GIT_COMMITTER_NAME="srv-rr-github-token"
-export GIT_COMMITTER_EMAIL="4607705+srv-rr-github-token@users.noreply.github.com"
-echo "$gpg_private_key" | base64 --decode > /tmp/git_gpg.key
-chmod 600 /tmp/git_gpg.key
-passphrase_decoded=$(echo "$passphrase"|base64 --decode)
-gpg --batch --yes --import /tmp/git_gpg.key
+# export GPG_TTY=`tty`
+# echo $GPG_TTY
+# export GIT_AUTHOR_NAME="srv-rr-github-token"
+# export GIT_AUTHOR_EMAIL="4607705+srv-rr-github-token@users.noreply.github.com"
+# export GIT_COMMITTER_NAME="srv-rr-github-token"
+# export GIT_COMMITTER_EMAIL="4607705+srv-rr-github-token@users.noreply.github.com"
+# echo "$gpg_private_key" | base64 --decode > /tmp/git_gpg.key
+# chmod 600 /tmp/git_gpg.key
+# passphrase_decoded=$(echo "$passphrase"|base64 --decode)
+# gpg --batch --yes --import /tmp/git_gpg.key
 #gpg --default-key E68AD642 --yes --pinentry-mode loopback --passphrase $passphrase_decoded --clearsign testfile.txt
-echo '/usr/bin/gpg --default-key E68AD642 --passphrase "$passphrase_decoded" --verbose --pinentry-mode loopback "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
+#echo '/usr/bin/gpg --default-key E68AD642 --passphrase "$passphrase_decoded" --verbose --pinentry-mode loopback "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
 
-echo "========DEBUG=========="
-gpg --status-fd=2 -bsau "E68AD642"
-which gpg
-gpg --version
-cat ~/.gitconfig
-export GIT_TRACE=1
-gpg --list-secret-keys
+# echo "========DEBUG=========="
+# gpg --status-fd=2 -bsau "E68AD642"
+# which gpg
+# gpg --version
+# cat ~/.gitconfig
+# export GIT_TRACE=1
+# gpg --list-secret-keys
 #cat ~/.bashrc
 #/usr/bin/gpg --no-tty --clearsign test.txt
 #gpg --status-fd=2 -bsau "srv-rr-github-token"
 #gpg -K --keyid-format SHORT
-git config -l | grep gpg
-echo "============DEBUG============="
+#git config -l | grep gpg
+#echo "============DEBUG============="
 
-git config --global gpg.program "/tmp/gpg-with-passphrase"
+#git config --global gpg.program "/tmp/gpg-with-passphrase"
 #git config --global gpg.program $(which gpg)
-git config --global user.signingkey "E68AD642"
-git config --global commit.gpgsign true
-git config --global user.email 4607705+srv-rr-github-token@users.noreply.github.com
-git config --global user.name srv-rr-github-token
+# git config --global user.signingkey "E68AD642"
+# git config --global commit.gpgsign true
+# git config --global user.email 4607705+srv-rr-github-token@users.noreply.github.com
+# git config --global user.name srv-rr-github-token
 
-git config --get user.signingkey
+#git config --get user.signingkey
 # adding trusted dir: https://github.com/actions/runner-images/issues/6775
 git config --global --add safe.directory /github/workspace
 

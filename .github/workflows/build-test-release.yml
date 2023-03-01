@@ -84,6 +84,13 @@ jobs:
           tags: ${{ steps.docker_action_meta.outputs.tags }}
           labels: ${{ steps.docker_action_meta.outputs.labels }}
           cache-to: type=inline
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@develop
