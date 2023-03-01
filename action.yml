@@ -23,6 +23,12 @@ inputs:
     required: false
   extra_plugins:
     description: "plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
+  gpg_private_key:
+    required: true
+    description: "gpg private key for signing commits"
+  passphrase:
+    required: true
+    description: "gpg passphrase to authenticate gpg key"
 outputs:
   new_release_version:
     description: "Version of the new release"
@@ -36,4 +42,3 @@ runs:
     - ${{ inputs.extra_plugins }}
     - ${{ inputs.gpg_private_key }}
     - ${{ inputs.passphrase }}
-    
