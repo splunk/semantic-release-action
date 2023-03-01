@@ -22,6 +22,7 @@
     ],
   plugins:
   [
+    [
       "@google/semantic-release-replace-plugin",
       {
         "replacements": [
@@ -42,20 +43,19 @@
         ]
       }
     ],
+    "@semantic-release/commit-analyzer",
     [
-      "@semantic-release/commit-analyzer",
-      [
-        "@semantic-release/exec",
-        {
-          "verifyReleaseCmd": "echo \"version=${nextRelease.version}\" >> $GITHUB_OUTPUT",
-          "successCmd": "echo \"new_release_published=${'true'}\" >> $GITHUB_OUTPUT",
-        }
-      ],
-      "@semantic-release/release-notes-generator",
-      ["@semantic-release/git", {
-            "assets": ["action.yml", "test.txt"],
-            "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
-        }],
-      "@semantic-release/github",
+      "@semantic-release/exec",
+      {
+        "verifyReleaseCmd": "echo \"version=${nextRelease.version}\" >> $GITHUB_OUTPUT",
+        "successCmd": "echo \"new_release_published=${'true'}\" >> $GITHUB_OUTPUT",
+      }
     ],
+    "@semantic-release/release-notes-generator",
+    ["@semantic-release/git", {
+          "assets": ["action.yml", "test.txt"],
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+      }],
+    "@semantic-release/github",
+  ],
 }
