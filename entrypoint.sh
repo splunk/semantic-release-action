@@ -25,11 +25,11 @@ export GIT_AUTHOR_NAME="srv-rr-github-token"
 export GIT_AUTHOR_EMAIL="srv-rr-github-token@splunk.com"
 export GIT_COMMITTER_NAME="srv-rr-github-token"
 export GIT_COMMITTER_EMAIL="srv-rr-github-token@splunk.com"
-echo "$gpg_private_key" > /tmp/git_gpg.key
-chmod 600 /tmp/git_gpg.key
-ls -la /tmp/
-gpg --batch --yes --import /tmp/git_gpg.key
-echo '/usr/bin/gpg2 --passphrase "$passphrase" --batch --no-tty "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
+echo "$gpg_private_key" | base64 --decode > git_gpg.key
+passphrase_decoded=$(echo "$passphrase"|base64 --decode)
+#chmod 600 /tmp/git_gpg.key
+gpg --batch --yes --import git_gpg.key
+echo '/usr/bin/gpg2 --passphrase "$passphrase_decoded" --batch --no-tty "$@"' > /tmp/gpg-with-passphrase && chmod +x /tmp/gpg-with-passphrase
 git config --global gpg.program "/tmp/gpg-with-passphrase"
 gpg --list-secret-keys
 
