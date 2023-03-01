@@ -26,21 +26,8 @@ on:
       - "main"
       - "develop"
 jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.7"
-      - name: Install actionlint
-        run: |
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/v1.6.23/scripts/download-actionlint.bash)
-      - uses: pre-commit/action@v3.0.0
-
   build-release:
     name: Build and release action
-    needs: pre-commit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -84,13 +71,19 @@ jobs:
           tags: ${{ steps.docker_action_meta.outputs.tags }}
           labels: ${{ steps.docker_action_meta.outputs.labels }}
           cache-to: type=inline
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v4
-        with:
-          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
+      - name: test commit
+        run: |
+          export GPG_TTY=`tty`
+          echo $GPG_TTY
+          export GIT_TRACE=1
+          gpg --version
+          which gpg
+          gpg --list-secret-keys
+          git config -l | grep gpg
+          git config --get user.signingkey
+          echo "test" > test.txt
+          git add test.txt
+          git commit -m "test"
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@develop
