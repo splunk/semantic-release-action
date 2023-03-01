@@ -92,10 +92,6 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: git_gpg.key
-          path: git_gpg.key
         
   update-semver:
     name: Move Repository semver tags
