@@ -6,7 +6,8 @@ RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
     && chmod +x /usr/bin/yq
 RUN yq --version
 WORKDIR /home/runner/work/
-RUN npm install gpg
+# RUN apt-get update && \
+#     apt-get install -y gnupg1
 RUN gpg --version
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 WORKDIR /
