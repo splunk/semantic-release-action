@@ -45,6 +45,11 @@ runs:
         git_commiter_email:  ${{ inputs.git_commiter_email }}
         git_user_signingkey: true
         git_commit_gpgsign: true
+    - name: Export missing envars
+      run: |
+        export GIT_AUTHOR_NAME=${{ inputs.git_commiter_name }}
+        export GIT_AUTHOR_EMAIL=${{ inputs.git_commiter_email }}
+      shell: bash 
     - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
