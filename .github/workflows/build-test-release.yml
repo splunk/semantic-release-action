@@ -38,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
         with:
-          git_commiter_name: ${{ secrets.SA_COMMITER_NAME }}
-          git_commiter_email: ${{ secrets.SA_COMMITER_EMAIL }}
+          git_committer_name: ${{ secrets.SA_COMMITER_NAME }}
+          git_committer_email: ${{ secrets.SA_COMMITER_EMAIL }}
           gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
           extra_plugins: |
