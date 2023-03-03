@@ -41,8 +41,6 @@ runs:
       with:
         gpg_private_key: ${{ inputs.gpg_private_key }}
         passphrase: ${{ inputs.passphrase }}
-        git_committer_name:  ${{ inputs.git_committer_name }}
-        git_committer_email:  ${{ inputs.git_committer_email }}
         git_user_signingkey: true
         git_commit_gpgsign: true
     - name: Prepare Semantic Release
@@ -73,3 +71,6 @@ runs:
       env:
         GIT_AUTHOR_NAME: ${{ inputs.git_committer_name }}
         GIT_AUTHOR_EMAIL: ${{ inputs.git_committer_email }}
+        GIT_COMMITTER_NAME: ${{ inputs.git_committer_name }}
+        GIT_COMMITTER_EMAIL: ${{ inputs.git_committer_email }}
+
