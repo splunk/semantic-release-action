@@ -24,6 +24,11 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
+    - name: Set up GPG creds
+      run: |
+        git config --global user.email 4607705+srv-rr-github-token@users.noreply.github.com
+        git config --global user.name srv-rr-github-token      
+      shell: bash
     - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
