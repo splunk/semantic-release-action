@@ -24,7 +24,6 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
-      shell: bash
     - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
