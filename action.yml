@@ -8,14 +8,14 @@ inputs:
     required: false
   extra_plugins:
     description: "plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
-  git_commiter_name:
-    description: "commiter name for semantic release changes"
+  git_committer_name:
+    description: "committer name for semantic release changes"
     required: true
-  git_commiter_email:
-    description: "commiter email address for semantic release changes"
+  git_committer_email:
+    description: "committer email address for semantic release changes"
     required: true
   gpg_private_key:
-    description: "gpg private key matching commiter email"
+    description: "gpg private key matching committer email"
     required: true
   passphrase:
     description: "passphrase for gpg private key"
@@ -41,14 +41,14 @@ runs:
       with:
         gpg_private_key: ${{ inputs.gpg_private_key }}
         passphrase: ${{ inputs.passphrase }}
-        git_commiter_name:  ${{ inputs.git_commiter_name }}
-        git_commiter_email:  ${{ inputs.git_commiter_email }}
+        git_committer_name:  ${{ inputs.git_committer_name }}
+        git_committer_email:  ${{ inputs.git_committer_email }}
         git_user_signingkey: true
         git_commit_gpgsign: true
     - name: Set up git author
       run: |
-        git config --global user.name ${{ inputs.git_commiter_name }}
-        git config --global user.email ${{ inputs.git_commiter_email }}
+        git config --global user.name ${{ inputs.git_committer_name }}
+        git config --global user.email ${{ inputs.git_committer_email }}
       shell: bash 
     - name: Prepare Semantic Release
       run: |
