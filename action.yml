@@ -8,6 +8,18 @@ inputs:
     required: false
   extra_plugins:
     description: "plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
+  git_commiter_name:
+    description: "commiter name for semantic release changes"
+    required: true
+  git_commiter_email:
+    description: "commiter email address for semantic release changes"
+    required: true
+  gpg_private_key:
+    description: "gpg private key matching commiter email"
+    required: true
+  passphrase:
+    description: "passphrase for gpg private key"
+    required: true
 
 outputs:
   new_release_version:
@@ -24,6 +36,15 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: "18"
+    - name: Set up GPG
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ inputs.gpg_private_key }}
+        passphrase: ${{ inputs.passphrase }}
+        git_commiter_name:  ${{ inputs.git_commiter_name }}
+        git_commiter_email:  ${{ inputs.git_commiter_email }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
     - name: Prepare Semantic Release
       run: |
         install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
