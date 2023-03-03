@@ -35,10 +35,6 @@ outputs:
   new_release_published:
     description: "Whether a new release was published"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.dry_run }}
-    - ${{ inputs.extra_plugins }}
-    - ${{ inputs.gpg_private_key }}
-    - ${{ inputs.passphrase }}
+  using: "node16"
+  main: "index.js"
+
