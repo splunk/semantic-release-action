@@ -45,9 +45,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
           GIT_AUTHOR_NAME: "srv-rr-github-token"
-          GIT_AUTHOR_EMAIL: "srv-rr-github-token@splunk.com"
+          GIT_AUTHOR_EMAIL: "94607705+srv-rr-github-token@users.noreply.github.com"
           GIT_COMMITTER_NAME: "srv-rr-github-token"
-          GIT_COMMITTER_EMAIL: "srv-rr-github-token@splunk.com"
+          GIT_COMMITTER_EMAIL: "94607705+srv-rr-github-token@users.noreply.github.com"
         with:
           extra_plugins: |
             @google/semantic-release-replace-plugin
