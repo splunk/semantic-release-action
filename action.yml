@@ -26,7 +26,7 @@ runs:
         node-version: "18"
     - name: Prepare Semantic Release
       run: |
-        install_command="npm install --no-package-lock --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
+        install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
         if [[ ! -z "${{ inputs.extra_plugins }}" ]]
         then
           while IFS= read -r line
