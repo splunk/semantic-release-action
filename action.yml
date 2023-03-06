@@ -16,21 +16,77 @@
 
 name: "Semantic release"
 description: "This tool performs semantic release or returns value of next release version"
+
 inputs:
   dry_run:
     description: "dry run - if only version should be returned without releasing new version"
-    default: false
+    default: "false"
     required: false
   extra_plugins:
     description: "plugins beside semantic-release/changelog, semantic-release/git, semantic-release/exec are to be installed"
+  git_committer_name:
+    description: "committer name for semantic release changes"
+    required: false
+  git_committer_email:
+    description: "committer email address for semantic release changes"
+    required: false
+  gpg_private_key:
+    description: "gpg private key matching committer email"
+    required: false
+  passphrase:
+    description: "passphrase for gpg private key"
+    required: false
+
 outputs:
   new_release_version:
     description: "Version of the new release"
+    value: ${{ steps.semantic.outputs.version }}
   new_release_published:
     description: "Whether a new release was published"
+    value: ${{ steps.semantic.outputs.new_release_published }}
+
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.dry_run }}
-    - ${{ inputs.extra_plugins }}
+  using: "composite"
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+    - name: Set up GPG
+      uses: crazy-max/ghaction-import-gpg@v5
+      if: ${{ inputs.dry_run == 'false' }}
+      with:
+        gpg_private_key: ${{ inputs.gpg_private_key }}
+        passphrase: ${{ inputs.passphrase }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+    - name: Prepare Semantic Release
+      run: |
+        install_command="npm install --no-package-lock --legacy-peer-deps --save false -D @semantic-release/changelog @semantic-release/git @semantic-release/exec"
+        if [[ ! -z "${{ inputs.extra_plugins }}" ]]
+        then
+          while IFS= read -r line
+          do
+            if [ ! -z "$line" ];then
+              install_command="$install_command $(echo -e "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+            fi
+          done <<< "${{ inputs.extra_plugins }}"
+        fi
+        $install_command
+      shell: bash
+    - id: semantic
+      run: |      
+        if [[ ${{ inputs.dry_run }} == true ]]
+        then
+          echo "Running dry-run Semantic Release"
+          npx semantic-release@20 --dry-run
+        else 
+          echo "Running Semantic Release"
+          npx semantic-release@20
+        fi
+      shell: bash
+      env:
+        GIT_AUTHOR_NAME: ${{ inputs.git_committer_name }}
+        GIT_AUTHOR_EMAIL: ${{ inputs.git_committer_email }}
+        GIT_COMMITTER_NAME: ${{ inputs.git_committer_name }}
+        GIT_COMMITTER_EMAIL: ${{ inputs.git_committer_email }}
