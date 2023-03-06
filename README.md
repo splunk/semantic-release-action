@@ -2,13 +2,19 @@
 Repository for providing basic semantic-release library functionalities as a GitHub action.
 
 ## Inputs
-| Input Parameter  | Required | Description                                                                |
-|:----------------:|:--------:|----------------------------------------------------------------------------|
-|     dry_run      |  false   | dry run - if only version should be returned without releasing new version |
-|   extra_plugins  |  false   | extra plugins - if additional plugins are to be installed                  |
+| Input Parameter  | Required | Description                                                                 |
+|:-----------------:|:--------:|----------------------------------------------------------------------------|
+|     dry_run       |  false   | dry run - if only version should be returned without releasing new version |
+|   extra_plugins   |  false   | extra plugins - if additional plugins are to be installed                  |
+|git_committer_name |  false   | git commiter name - name of commiter used to sign bot commits              |
+|git_committer_email|  false   | git commiter email - email address of committer used to sign bot commits   |
+|  gpg_private_key  |  false   | gpg private key - key associated with committer                            |
+|    passphrase     |  false   | passphrase - passphrase for gpg private key                                |
+
+
 
 ## Outputs
-|       Input Parameter       | Description                                                    |
+|       Output Parameter       | Description                                                   |
 |:---------------------------:|:---------------------------------------------------------------|
 |     new_release_version     | Version of the new release                                     |
 |    new_release_published    | Whether a new release was published                            |                                                                     
@@ -29,8 +35,12 @@ jobs:
           persist-credentials: false
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@v1.2
+        uses: splunk/semantic-release-action@v1.3
         with:
+          git_committer_name: ${{ secrets.SA_COMMITTER_NAME }}
+          git_committer_email: ${{ secrets.SA_COMMITTER_EMAIL }}
+          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
           extra_plugins: |
             @google/semantic-release-replace-plugin
 ```
