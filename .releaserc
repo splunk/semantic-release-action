@@ -23,6 +23,28 @@
   plugins:
   [
     "@semantic-release/commit-analyzer",
+      [
+        "@google/semantic-release-replace-plugin",
+        {
+          "replacements": [
+            {
+              "files": [".github/workflows/release.yml"],
+              "from": "uses: splunk/semantic-release-action@.*",
+              "to": "uses: splunk/semantic-release-action@${nextRelease.version}",
+              "results": [
+                {
+                  "file": ".github/workflows/release.yml",
+                  "hasChanged": true,
+                  "numMatches": 1,
+                  "numReplacements": 1
+                }
+              ],
+              "countMatches": true
+            }
+          ]
+        }
+      ],
+    "@semantic-release/commit-analyzer",
     [
       "@semantic-release/exec",
       {
@@ -32,7 +54,7 @@
     ],
     "@semantic-release/release-notes-generator",
     ["@semantic-release/git", {
-          "assets": ["action.yml"],
+          "assets": ["action.yml", ".github/workflows/release.yml"],
           "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes} [skip ci]"
       }],
     "@semantic-release/github",
