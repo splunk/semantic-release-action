@@ -37,8 +37,8 @@ jobs:
         id: semantic
         uses: splunk/semantic-release-action@v1.3
         with:
-          git_committer_name: ${{ secrets.SA_COMMITTER_NAME }}
-          git_committer_email: ${{ secrets.SA_COMMITTER_EMAIL }}
+          git_committer_name: ${{ secrets.SA_GH_USER_NAME }}
+          git_committer_email: ${{ secrets.SA_GH_USER_EMAIL }}
           gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
           extra_plugins: |

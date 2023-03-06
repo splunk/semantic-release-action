@@ -90,4 +90,3 @@ runs:
         GIT_AUTHOR_EMAIL: ${{ inputs.git_committer_email }}
         GIT_COMMITTER_NAME: ${{ inputs.git_committer_name }}
         GIT_COMMITTER_EMAIL: ${{ inputs.git_committer_email }}
-
