@@ -50,7 +50,7 @@ jobs:
           persist-credentials: false
       - name: Semantic release
         id: semantic
-        uses: splunk/semantic-release-action@feat/gpg-signing-composite-action
+        uses: splunk/semantic-release-action@1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
         with:
