@@ -30,7 +30,7 @@
             {
               "files": [".github/workflows/release.yml"],
               "from": "uses: splunk/semantic-release-action@.*",
-              "to": "uses: splunk/semantic-release-action@${nextRelease.version}",
+              "to": "uses: splunk/semantic-release-action@v${nextRelease.version}",
               "results": [
                 {
                   "file": ".github/workflows/release.yml",
@@ -55,7 +55,7 @@
     "@semantic-release/release-notes-generator",
     ["@semantic-release/git", {
           "assets": ["action.yml", ".github/workflows/release.yml"],
-          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes} [skip ci]"
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }],
     "@semantic-release/github",
   ],
