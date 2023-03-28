@@ -27,16 +27,18 @@ inputs:
   git_committer_name:
     description: "committer name for semantic release changes"
     required: false
+    default: "semantic-release-bot"
   git_committer_email:
     description: "committer email address for semantic release changes"
     required: false
+    default: "semantic-release-bot"
   gpg_private_key:
     description: "gpg private key matching committer email"
     required: false
   passphrase:
     description: "passphrase for gpg private key"
     required: false
-
+    
 outputs:
   new_release_version:
     description: "Version of the new release"
