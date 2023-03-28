@@ -54,7 +54,7 @@ runs:
         node-version: "18"
     - name: Set up GPG
       uses: crazy-max/ghaction-import-gpg@v5
-      if: ${{ inputs.dry_run == 'false' }}
+      if: ${{ (inputs.dry_run == 'false') && (inputs.gpg_private_key != '') && (inputs.passphrase != '') }}
       with:
         gpg_private_key: ${{ inputs.gpg_private_key }}
         passphrase: ${{ inputs.passphrase }}
