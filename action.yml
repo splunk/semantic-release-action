@@ -27,18 +27,20 @@ inputs:
   git_committer_name:
     description: "committer name for semantic release changes"
     required: false
-    default: ${{ github.actor }}
+    default: ${{ secrets.SA_GH_USER_NAME }}
   git_committer_email:
     description: "committer email address for semantic release changes"
     required: false
-    default: ${{ github.actor }}
+    default: ${{ secrets.SA_GH_USER_EMAIL }}
   gpg_private_key:
     description: "gpg private key matching committer email"
     required: false
+    default: ${{ secrets.SA_GPG_PRIVATE_KEY }}
   passphrase:
     description: "passphrase for gpg private key"
     required: false
-
+    default: ${{ secrets.SA_GPG_PASSPHRASE }}
+    
 outputs:
   new_release_version:
     description: "Version of the new release"
