@@ -32,7 +32,7 @@ jobs:
           submodules: false
           persist-credentials: false
       - name: Semantic release
-        uses: splunk/semantic-release-action@v1.3.6
+        uses: splunk/semantic-release-action@v1.3.7
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
         with:
