@@ -1,13 +1,17 @@
 name: Release
+
 on:
   push:
     branches:
       - "main"
       - "develop"
+    tags:
+      - "v*"
   pull_request:
     branches:
       - "main"
       - "develop"
+
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
@@ -20,17 +24,14 @@ jobs:
       - uses: pre-commit/action@v3.0.1
 
   release:
-    name: release
     needs: pre-commit
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: false
           persist-credentials: false
       - name: Semantic release
-        id: semantic
         uses: splunk/semantic-release-action@v1.3.6
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
@@ -41,3 +42,11 @@ jobs:
           passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
           extra_plugins: |
             @google/semantic-release-replace-plugin
+
+  update-semver:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: splunk/addonfactory-update-semver@v1
