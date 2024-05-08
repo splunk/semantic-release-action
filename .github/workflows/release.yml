@@ -12,6 +12,10 @@ on:
       - "main"
       - "develop"
 
+permissions:
+  contents: write
+  statuses: write
+
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
