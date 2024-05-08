@@ -1,5 +1,5 @@
 # semantic-release-action
-Repository for providing basic semantic-release library functionalities as a GitHub action.
+Repository for providing basic semantic-release library functionalities as a GitHub Action.
 
 ## Inputs
 | Input Parameter  | Required | Description                                                                 |
@@ -22,14 +22,14 @@ Repository for providing basic semantic-release library functionalities as a Git
 ## Example usage:
 
 ```yaml
-# jobs section in GH actions  workflow file 
+# jobs section in GitHub Actions workflow file 
 jobs:
  release:
     name: Release new version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: false
           persist-credentials: false
