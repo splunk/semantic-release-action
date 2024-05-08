@@ -1,0 +1,15 @@
+name: Update Semver
+
+on:
+  push:
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  update-semver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: splunk/addonfactory-update-semver@v1
