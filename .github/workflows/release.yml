@@ -32,7 +32,7 @@ jobs:
           submodules: false
           persist-credentials: false
       - name: Semantic release
-        uses: splunk/semantic-release-action@v1.3.7
+        uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
         with:
@@ -50,3 +50,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: splunk/addonfactory-update-semver@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
+        with:
+          git_committer_name: ${{ secrets.SA_GH_USER_NAME }}
+          git_committer_email: ${{ secrets.SA_GH_USER_EMAIL }}
+          gpg_private_key: ${{ secrets.SA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SA_GPG_PASSPHRASE }}
