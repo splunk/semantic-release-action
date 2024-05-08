@@ -50,3 +50,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: splunk/addonfactory-update-semver@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
