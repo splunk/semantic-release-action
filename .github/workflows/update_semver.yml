@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: splunk/addonfactory-update-semver@v1
+      - uses: splunk/addonfactory-update-semver@v1.0.5
