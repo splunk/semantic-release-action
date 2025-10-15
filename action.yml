@@ -65,10 +65,10 @@ runs:
         if [[ ${{ inputs.dry_run }} == true ]]
         then
           echo "Running dry-run Semantic Release"
-          npx semantic-release@23 --dry-run
+          npx semantic-release@24 --dry-run
         else 
           echo "Running Semantic Release"
-          npx semantic-release@23
+          npx semantic-release@24
         fi
       shell: bash
       env:
