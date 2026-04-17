@@ -33,11 +33,18 @@ jobs:
         with:
           submodules: false
           persist-credentials: false
+      - name: Generate GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - name: Semantic release
         id: semantic
         uses: splunk/semantic-release-action@v1.3
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_ADMIN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           git_committer_name: ${{ secrets.SA_GH_USER_NAME }}
           git_committer_email: ${{ secrets.SA_GH_USER_EMAIL }}
